@@ -5,11 +5,12 @@
     android:layout_height="wrap_content">
 
     <TextView
+        android:id="@+id/txt_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@color/red"
+        android:background="@color/white"
         android:text="teste ola mundo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
