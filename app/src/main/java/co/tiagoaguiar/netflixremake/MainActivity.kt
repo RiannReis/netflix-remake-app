@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val movies = mutableListOf<Movie>()
-        for (i in 0 until 5){
+        for (i in 0 until 30){
             val movie = Movie(R.drawable.movie)
             movies.add(movie)
         }
