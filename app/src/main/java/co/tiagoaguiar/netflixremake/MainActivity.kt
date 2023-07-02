@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import co.tiagoaguiar.netflixremake.model.Category
 import co.tiagoaguiar.netflixremake.model.Movie
 
 class MainActivity : AppCompatActivity() {
@@ -13,15 +14,25 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val movies = mutableListOf<Movie>()
-        for (i in 0 until 30){
-            val movie = Movie(R.drawable.movie)
-            movies.add(movie)
+        // cat 1
+            // f1 - f2 - f3 - f4 ...
+        //cat 2
+            // f1 - f2 - f3 - f4 ...
+
+        val categories = mutableListOf<Category>()
+        for (j in 0 until 5){
+            val movies = mutableListOf<Movie>()
+            for (i in 0 until 15){
+                val movie = Movie(R.drawable.movie)
+                movies.add(movie)
+            }
+            val category = Category("Cat $j", movies)
+            categories.add(category)
         }
 
-        val adapter = MainAdapter(movies)
+        val adapter = CategoryAdapter(categories)
         val rv: RecyclerView = findViewById(R.id.rv_main)
-        rv.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        rv.layoutManager = LinearLayoutManager(this)
         rv.adapter = adapter
 
     }
