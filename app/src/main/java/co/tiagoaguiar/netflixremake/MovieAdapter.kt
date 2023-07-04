@@ -1,5 +1,6 @@
 package co.tiagoaguiar.netflixremake
 
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import co.tiagoaguiar.netflixremake.model.Movie
+import co.tiagoaguiar.netflixremake.util.DownloadImageTask
 
 class MovieAdapter(private val movies: List<Movie>,
 @LayoutRes private val layoutId: Int) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
@@ -29,8 +31,15 @@ class MovieAdapter(private val movies: List<Movie>,
         fun bind(movie: Movie){
             val imgCover: ImageView = itemView.findViewById(R.id.img_cover)
 
-            // TODO("aqui vai ser trocado por uma URL que virá do servidor")
-            // imgCover.setImageResource(movie.coverUrl)
+            //outro modo de fazer, mas com o mesmo fundamento
+            DownloadImageTask(object : DownloadImageTask.Callback{
+                override fun onResult(bitmap: Bitmap) {
+                    imgCover.setImageBitmap(bitmap)
+                }
+            }).execute(movie.coverUrl)
+
+            //usando Picasso: apenas uma linha e tem as imagens na tela
+//            Picasso.get().load(movie.coverUrl).into(imgCover)
         }
     }
 
