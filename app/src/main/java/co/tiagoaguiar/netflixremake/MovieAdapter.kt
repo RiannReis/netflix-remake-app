@@ -11,7 +11,9 @@ import co.tiagoaguiar.netflixremake.model.Movie
 import co.tiagoaguiar.netflixremake.util.DownloadImageTask
 
 class MovieAdapter(private val movies: List<Movie>,
-@LayoutRes private val layoutId: Int) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
+    @LayoutRes private val layoutId: Int,
+    private val onItemClickListener: ((Int) -> Unit)? = null
+    ) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
@@ -30,6 +32,9 @@ class MovieAdapter(private val movies: List<Movie>,
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         fun bind(movie: Movie){
             val imgCover: ImageView = itemView.findViewById(R.id.img_cover)
+            imgCover.setOnClickListener {
+                onItemClickListener?.invoke(movie.id)
+            }
 
             //outro modo de fazer, mas com o mesmo fundamento
             DownloadImageTask(object : DownloadImageTask.Callback{
